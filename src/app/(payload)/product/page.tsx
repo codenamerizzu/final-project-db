@@ -8,7 +8,16 @@ import CardProduct from 'components/card-product'
 import '../global.css'
 
 export default function Product() {
-  const [products, setProducts] = useState([])
+  interface Product {
+    id: number
+    name: string
+    slug: string
+    image: string
+    price: number
+    category: string
+  }
+
+  const [products, setProducts] = useState<Product[]>([])
 
   useEffect(() => {
     const fetchProducts = async () => {

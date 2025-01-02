@@ -7,9 +7,18 @@ import './global.css'
 import Link from 'next/link'
 
 export default function Product() {
-  const [newProducts, setNewProducts] = useState([])
-  const [foodCategory, setFoodCategory] = useState([])
-  const [drinkCategory, setDrinkCategory] = useState([])
+  interface Product {
+    id: number
+    name: string
+    slug: string
+    image: string
+    price: number
+    category: string
+  }
+
+  const [newProducts, setNewProducts] = useState<Product[]>([])
+  const [foodCategory, setFoodCategory] = useState<Product[]>([])
+  const [drinkCategory, setDrinkCategory] = useState<Product[]>([])
 
   useEffect(() => {
     const fetchNewProducts = async () => {

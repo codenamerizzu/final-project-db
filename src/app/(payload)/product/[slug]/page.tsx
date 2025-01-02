@@ -3,13 +3,23 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
-
 import UserLayout from '../../layout-user'
 
 export default function ProductDetail() {
+  interface Product {
+    name: string
+    slug: string
+    image: string
+    desc: string
+    price: number
+    category: string
+  }
+
   const params = useParams()
   const { slug } = params
-  const [product, setProduct] = useState(null)
+
+  // Update state type to Product | null
+  const [product, setProduct] = useState<Product | null>(null)
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -19,7 +29,9 @@ export default function ProductDetail() {
           throw new Error('Network response was not ok')
         }
         const data = await res.json()
-        setProduct(data.docs[0] || null)
+
+        // Set product to the first item or null if not found
+        setProduct(data.docs.length > 0 ? data.docs[0] : null)
       } catch (err) {
         console.log('Fetch error:', err)
       }
@@ -30,7 +42,8 @@ export default function ProductDetail() {
     }
   }, [slug])
 
-  if (!product) return <p>product not found</p>
+  // Handle case where product is not found
+  if (!product) return <p>Product not found</p>
 
   return (
     <UserLayout>
