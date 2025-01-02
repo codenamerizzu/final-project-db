@@ -23,16 +23,36 @@ export const Product: CollectionConfig = {
     },
     {
       name: 'image',
-      type: 'upload',
+      type: 'text',
       label: 'Gambar produk',
-      relationTo: 'media',
       required: true,
     },
     {
       name: 'desc',
-      type: 'richText',
+      type: 'textarea',
       label: 'Deskripsi produk',
       required: true,
+    },
+    {
+      name: 'price',
+      type: 'number',
+      label: 'Harga',
+      required: true,
+    },
+    {
+      name: 'category',
+      type: 'select',
+      label: 'Kategori produk',
+      options: [
+        {
+          label: 'Makanan',
+          value: 'food',
+        },
+        {
+          label: 'Minuman',
+          value: 'drink',
+        },
+      ],
     },
   ],
 }
