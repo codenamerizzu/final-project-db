@@ -1,9 +1,17 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-const CardProduct = ({ name, slug, image, price, category }) => {
+interface CardProductProps {
+  name: string
+  slug: string
+  image: string
+  price: number
+  category: string
+}
+
+const CardProduct = ({ name, slug, image, price, category }: CardProductProps) => {
   return (
-    <div className="flex flex-col bg-white text-black rounded-lg p-4">
+    <div className="flex flex-col bg-white text-black rounded-lg p-4 shadow-md">
       <div className="relative m-0 p-0">
         <Image
           src={image}
@@ -19,14 +27,11 @@ const CardProduct = ({ name, slug, image, price, category }) => {
       <div>
         <h1 className="text-2xl font-bold pt-4">{name}</h1>
         <h1 className="text-xl font-semibold mb-2">{`Rp ${price.toLocaleString('id-ID')}`}</h1>
-        <button className="w-full bg-gray-800 hover:opacity-70 text-white py-2 px-3 rounded-md mt-4">
-          <Link
-            href={`/product/${slug}`}
-            className="w-full h-full flex items-center justify-center"
-          >
+        <Link href={`/product/${slug}`} passHref>
+          <button className="w-full bg-gray-800 hover:opacity-70 text-white py-2 px-3 rounded-md mt-4">
             Go to page
-          </Link>
-        </button>
+          </button>
+        </Link>
       </div>
     </div>
   )
